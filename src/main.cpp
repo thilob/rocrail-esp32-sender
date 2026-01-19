@@ -4,6 +4,14 @@
 #include <Preferences.h>
 #include <WiFiUdp.h>
 
+// Fallback-Defaults falls nicht in platformio.ini definiert
+#ifndef DEFAULT_INPUT_PINS
+#define DEFAULT_INPUT_PINS "16,17,18,19"
+#endif
+#ifndef DEFAULT_OUTPUT_PINS
+#define DEFAULT_OUTPUT_PINS "25,26,27,33"
+#endif
+
 /*
   Serial Logging
   --------------
@@ -190,7 +198,7 @@ static void loadConfig() {
   cfg.iid     = prefs.getString("iid", "esp32");
 
   cfg.inAddrBase  = (uint16_t)prefs.getUShort("ibase", 100);
-  cfg.inPinsCsv   = prefs.getString("ipins", "16,17,18,19");
+  cfg.inPinsCsv   = prefs.getString("ipins", DEFAULT_INPUT_PINS);
   cfg.inInvCsv    = prefs.getString("iinv",  "0,0,0,0");
   cfg.debounceMs  = (uint16_t)prefs.getUShort("deb", 40);
 
@@ -199,7 +207,7 @@ static void loadConfig() {
   cfg.logonEverySec = (uint16_t)prefs.getUShort("logsec", 60);
 
   cfg.outAddr     = (uint16_t)prefs.getUShort("oaddr", 1);
-  cfg.outPinsCsv  = prefs.getString("opins", "25,26,27,33");
+  cfg.outPinsCsv  = prefs.getString("opins", DEFAULT_OUTPUT_PINS);
   cfg.outInvCsv   = prefs.getString("oinv",  "0,0,0,0");
 
   prefs.end();
